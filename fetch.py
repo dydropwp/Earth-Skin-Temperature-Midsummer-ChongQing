@@ -5,14 +5,13 @@
 
 """
 Fetch hourly Earth Skin Temperature (TS) from NASA POWER for Chongqing,
-August 2026. Writes one raw JSON per request into __pycache__/ and a
-parsed CSV into data/.
+August 2026.
+
+One request, one cache file, one CSV. The second run reads the cache and
+never touches the network.
 
 Run:
     uv run fetch.py
-
-The first run hits the network. Every later run reads __pycache__/ and
-never touches the network again.
 """
 
 import csv
@@ -27,14 +26,14 @@ import requests
 # The knobs.
 # ---------------------------------------------------------------------------
 
-LAT, LNG = 29.56, 106.55          # Chongqing (Yuzhong district)
+LAT, LNG = 29.56, 106.55          # Chongqing, Yuzhong district
 START = "20260801"                 # YYYYMMDD
 END = "20260831"                   # YYYYMMDD
 PARAMETER = "TS"                   # Earth Skin Temperature
 COMMUNITY = "RE"                   # Renewable Energy community
 
 HERE = Path(__file__).parent
-CACHE = HERE / "data" / "cache"     # raw replies, one file per request
+CACHE = HERE / "data"       # raw replies, one file per request
 OUTPUT = HERE / "data" / "ts-chongqing-2026-08.csv"
 
 URL = "https://power.larc.nasa.gov/api/temporal/hourly/point"
@@ -73,6 +72,7 @@ def fetch(params):
         print(f"  cache hit: {cached.name}")
         return cached.read_text(encoding="utf-8")
 
+    print(f"  fetching from {URL} ...")
     try:
         reply = requests.get(URL, params=params, timeout=60)
         reply.raise_for_status()
