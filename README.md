@@ -38,6 +38,18 @@ On the left, every day of August is drawn on top of the last as a 24-hour curve.
 
 The hottest day (27 August) is bent into a circle: the hour becomes an angle, the temperature becomes a radius. The still frame shows the completed shape — an off-centre pear, bulging in the afternoon and narrowing before dawn, with a black dot at 12:00. The animation starts at midnight, and an orange hand pulls a moving dot clockwise, drawing the shape out hour by hour. What it hides is every comparison between days: it tells the story of one day and throws away the thirty other days that were equally real but cooler.
 
+### Try it yourself
+
+![The interactive clock](out/8501.png)
+
+A small Streamlit app turns the same 744 numbers into an interactive clock: pick any day from a dropdown, and the shape redraws for that day. The temperature rings and the canvas are fixed to the whole month, so a cool day really does look smaller than a hot day — the shape is comparable across the month.
+
+Run it from `week03/`:
+
+    uv run --with streamlit --with matplotlib streamlit run app.py
+
+The app reads the same committed CSV, so it works offline.
+
 ## The drafts I rejected
 
 ### Rejected draft 1: a month at a glance with harsh colours
