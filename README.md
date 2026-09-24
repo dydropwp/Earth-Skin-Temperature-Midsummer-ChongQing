@@ -44,7 +44,7 @@ The hottest day (27 August) is bent into a circle: the hour becomes an angle, th
 
 A small Streamlit app turns the same 744 numbers into an interactive clock: pick any day from a dropdown, and the shape redraws for that day. The temperature rings and the canvas are fixed to the whole month, so a cool day really does look smaller than a hot day — the shape is comparable across the month.
 
-Run it from `week03/`:
+Run it from the repository root:
 
     uv run --with streamlit --with matplotlib streamlit run app.py
 
